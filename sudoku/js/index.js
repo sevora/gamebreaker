@@ -68,6 +68,18 @@ document.body.addEventListener('keydown', function(event) {
     }
 });
 
+canvas.addEventListener('click', function(event) {
+    let boundingRectangle = canvas.getBoundingClientRect();
+    let clickX = event.pageX - boundingRectangle.left;
+    let clickY = event.pageY - boundingRectangle.top;
+
+    let interpolatedX = Math.floor(clickX/600 * 9);
+    let interpolatedY = Math.floor(clickY/600 * 9);
+
+    pointer.x = interpolatedX;
+    pointer.y = interpolatedY;
+});
+
 loop();
 // render();
 // document.body.addEventListener('load', loop); fix this so that loop only runs when body is loaded
