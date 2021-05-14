@@ -26,6 +26,49 @@ class SudokuBoard {
         this.height = height;
     }
 
+    getEmptyCell() {
+        
+        for (let y = 0; y < 9; ++y) {
+            for (let x = 0; x < 9; ++x) {
+                if (this.matrix[y][x] == 0) return { x, y };
+            }
+        }
+
+        return { x: -1, y: -1 };
+    }
+
+    // can be rewrote to be more efficient, as in return false if anything is wrong instead of computing
+    // for all the truth values for the current row, column, and subgrid
+    testAnswerAt(x, y, answer) {
+
+        let answerDoesNotExist = function(cell, index) {
+            if (cell == this.answer && index != this.position) return false;
+            return true;
+        }
+
+        let rowValid = this.matrix[y].every(answerDoesNotExist, { position: x, answer }); 
+        let columnValid = this.matrix.map(row => row[x]).every(answerDoesNotExist, { position: y, answer });
+
+        // rewrite to use answerDoesNotExist function by making getSubgrids better
+        let subgridValid = true;
+        let anchorY = y - (y % 3);
+        let anchorX = x - (x % 3);
+
+        for (let subgridY = anchorY; subgridY < anchorY + 3; ++subgridY) {
+            for (let subgridX = anchorX; subgridX < anchorX + 3; ++subgridX) {
+                
+                if (subgridY == y && subgridX == x) continue;
+
+                if (this.matrix[subgridY][subgridX] == answer) {
+                    subgridValid = false;
+                }
+            }
+        }
+
+        return rowValid && columnValid && subgridValid;
+        
+    }
+    
     getRows() {
         return this.matrix;
     }
@@ -40,6 +83,7 @@ class SudokuBoard {
         return columns;
     }
 
+    // rewrite to accept optional x and optional y and return the corresponding subgrid
     getSubgrids() {
         let subgrids = [];
         
@@ -62,6 +106,8 @@ class SudokuBoard {
 
     // validity for a sudoku board filled with acceptable values
     // returns true if the board is valid (has solutions) and false otherwise
+    // rewrite to return right away if anything is false instead of computing for all the truth values
+    // for all rows, columns, and subgrids
     isValid() {
 
         let noRepeatingDigit = function(array) {
@@ -90,6 +136,30 @@ class SudokuBoard {
         this.matrix[y][x] = value;
         this.valid = this.isValid();
         return value;
+    }
+
+    solve() {
+
+        let emptyCell = this.getEmptyCell();
+
+        if (emptyCell.x == -1 && emptyCell.y == -1) {
+            return true;
+        }
+
+        let { x, y } = emptyCell;
+        for (let answer = 1; answer <= 9; ++answer) {
+            if (this.testAnswerAt(x, y, answer)) {
+                
+                this.matrix[y][x] = answer;
+
+                if (this.solve()) return true;
+
+                this.matrix[y][x] = 0;
+            }
+        }
+
+        return false;
+
     }
 
     render(context) {
