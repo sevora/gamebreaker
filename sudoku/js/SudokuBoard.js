@@ -113,16 +113,16 @@ class SudokuBoard {
         return rowValid && columnValid && subgridValid; */
 
         let answerDoesExist = function(cell, index) {
-            if (cell == this.answer && index != this.position) return true;
-            return false;
+            return cell == this.answer && index != this.position;
         }
  
         let anchorY = y - (y % 3);
         let anchorX = x - (x % 3);
         let flatIndex = (y - anchorY) * 3 + (x - anchorX);
+        // console.log(flatIndex, this.getSubgrid(x, y)[flatIndex]);
 
         return !this.getRows()[y].some(answerDoesExist, { position: x, answer }) 
-            && !this.getColumns()[x].some(answerDoesExist, { position: x, answer })
+            && !this.getColumns()[x].some(answerDoesExist, { position: y, answer })
             && !this.getSubgrid(x, y).some(answerDoesExist, { position: flatIndex, answer });
 
         
