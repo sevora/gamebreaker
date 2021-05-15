@@ -26,6 +26,50 @@ class SudokuBoard {
         this.height = height;
     }
 
+    getRows() {
+        return this.matrix;
+    }
+
+    getColumns() {
+        let columns = [];
+        
+        for (let index = 0; index < 9; ++index) {
+            columns.push(this.matrix.map(row => row[index]));
+        }
+
+        return columns;
+    }
+
+    getSubgrid(x, y) {
+        let anchorY = y - (y % 3);
+        let anchorX = x - (x % 3);
+        
+        let subgrid = [];
+        for (let currentY = anchorY; currentY < anchorY + 3; ++currentY) {
+            for (let currentX = anchorX; currentX < anchorX + 3; ++currentX) {
+                subgrid.push(this.matrix[currentY][currentX]);
+            }
+        }
+
+        return subgrid;
+    }
+
+    getSubgrids() {
+ 
+        let subgrids = [];
+        
+        for (let anchorY = 0; anchorY < 9; anchorY += 3) {
+            for (let anchorX = 0; anchorX < 9; anchorX += 3) {
+                subgrids.push( this.getSubgrid(anchorX, anchorY) );
+
+            }
+        }
+
+        return subgrids;
+    }
+
+
+    // returns the position of an empty cell, left-to-right top-to-bottom priority
     getEmptyCell() {
         
         for (let y = 0; y < 9; ++y) {
@@ -37,10 +81,11 @@ class SudokuBoard {
         return { x: -1, y: -1 };
     }
 
-    // can be rewrote to be more efficient, as in return false if anything is wrong instead of computing
-    // for all the truth values for the current row, column, and subgrid
+    // returns true if the given answer is valid at the given position
+    // false otherwise
     testAnswerAt(x, y, answer) {
 
+        /*
         let answerDoesNotExist = function(cell, index) {
             if (cell == this.answer && index != this.position) return false;
             return true;
@@ -65,52 +110,29 @@ class SudokuBoard {
             }
         }
 
-        return rowValid && columnValid && subgridValid;
+        return rowValid && columnValid && subgridValid; */
+
+        let answerDoesExist = function(cell, index) {
+            if (cell == this.answer && index != this.position) return true;
+            return false;
+        }
+ 
+        let anchorY = y - (y % 3);
+        let anchorX = x - (x % 3);
+        let flatIndex = (y - anchorY) * 3 + (x - anchorX);
+
+        return !this.getRows()[y].some(answerDoesExist, { position: x, answer }) 
+            && !this.getColumns()[x].some(answerDoesExist, { position: x, answer })
+            && !this.getSubgrid(x, y).some(answerDoesExist, { position: flatIndex, answer });
+
         
     }
     
-    getRows() {
-        return this.matrix;
-    }
-
-    getColumns() {
-        let columns = [];
-        
-        for (let index = 0; index < 9; ++index) {
-            columns.push(this.matrix.map(row => row[index]));
-        }
-
-        return columns;
-    }
-
-    // rewrite to accept optional x and optional y and return the corresponding subgrid
-    getSubgrids() {
-        let subgrids = [];
-        
-        for (let anchorY = 0; anchorY < 9; anchorY += 3) {
-            for (let anchorX = 0; anchorX < 9; anchorX += 3) {
-
-                let subgrid = [];
-                for (let y = anchorY; y < anchorY + 3; ++y) {
-                    for (let x = anchorX; x < anchorX + 3; ++x) {
-                        subgrid.push(this.matrix[y][x]);
-                    }
-                }
-                subgrids.push(subgrid);
-
-            }
-        }
-
-        return subgrids;
-    }
-
     // validity for a sudoku board filled with acceptable values
     // returns true if the board is valid (has solutions) and false otherwise
-    // rewrite to return right away if anything is false instead of computing for all the truth values
-    // for all rows, columns, and subgrids
     isValid() {
 
-        let noRepeatingDigit = function(array) {
+        /* let noRepeatingDigit = function(array) {
             let digits = [];
             for (let index = 0; index < array.length; ++index) {
                 let element = array[index];
@@ -124,7 +146,21 @@ class SudokuBoard {
         let columnsValid = this.getColumns().every(noRepeatingDigit);
         let subgridsValid = this.getSubgrids().every(noRepeatingDigit);
 
-        return rowsValid && columnsValid && subgridsValid;
+        return rowsValid && columnsValid && subgridsValid; */
+
+        let hasRepeatingDigit = function(array) {
+            let digits = [];
+            for (let index = 0; index < array.length; ++index) {
+                let element = array[index];
+                if (digits.indexOf(element) > -1) return true;
+                if (element != 0) digits.push(array[index]);
+            }
+            return false;
+        }
+
+        return !this.getRows().some(hasRepeatingDigit) 
+            && !this.getColumns().some(hasRepeatingDigit)
+            && !this.getSubgrids().some(hasRepeatingDigit);
 
     }
 
