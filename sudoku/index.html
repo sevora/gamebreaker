@@ -2,10 +2,22 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sudoku</title>
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <canvas width="600" height="600"></canvas>
+        <header>Sudoku<header>
+        <div class="canvas-wrapper">
+            <canvas width="300" height="300"></canvas>
+            <button class="clear-button">Clear</button>
+        </div>
+        <button class="push-button">
+            <span>Solve</span>
+        </button>
+        
+        <input type="number" class="mobile-input"/>
+        
         <script src="js/SudokuBoard.js"></script>
         <script src="js/SquarePointer.js"></script>
         <script src="js/index.js"></script>

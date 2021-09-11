@@ -25,7 +25,15 @@ class SudokuBoard {
         this.width = width;
         this.height = height;
     }
-
+    
+    clear() {
+    	for(let y = 0; y < this.matrix.length; ++y) {
+    		for(let x = 0; x < this.matrix[y].length; ++x) {
+    			this.matrix[y][x] = 0;
+    		}
+    	}
+    }
+    
     getRows() {
         return this.matrix;
     }
@@ -209,7 +217,7 @@ class SudokuBoard {
         context.fillStyle = this.valid ? 'black' : 'red';
         context.strokeStyle = 'black';
 
-        context.font = `${width / 10}px Roboto`;
+        context.font = `${this.width / 11}px Roboto`;
         context.textBaseline = 'middle';
         context.textAlign = 'center';
 

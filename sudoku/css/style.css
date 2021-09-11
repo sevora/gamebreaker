@@ -1,0 +1,78 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+header {
+    font-size: 32px;
+    font-family: 'Fin Serif Display';
+    text-align: center;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+.canvas-wrapper {
+    width: 300px;
+    margin: 10px auto 20px auto;
+}
+
+.clear-button {
+	color: #2F97EC;
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+  
+    display: block;
+    margin: 10px 0 0 auto;
+}
+
+.clear-button.disabled {
+	color: #B5B5B5;
+}
+
+.push-button:focus:not(:focus-visible) {
+	outline: none;
+}
+
+.push-button, .push-button span {
+	border-radius: 16px;
+}
+
+.push-button {
+	width: 300px;
+	border: none;
+	padding: 0;
+	background: #2172B5;
+  
+	cursor: pointer;
+	outline-offset: 4px;
+}
+
+.push-button span {
+	color: white;
+	background: #2F97EC;
+  
+	display: block;
+	padding: 12px 42px;
+	font-size: 1.25rem;
+  
+	transform: translateY(-6px);
+}
+
+.push-button:active span {
+	transform: translateY(-2px);
+}
+
+.mobile-input {
+	width: 0;
+	overflow: hidden;
+	position: absolute;
+	top: -100000px;
+}
+
+@font-face {
+	font-family: 'Fin Serif Display';
+	src: url(fonts/FinSerifDisplay-Italic.ttf)
+}
