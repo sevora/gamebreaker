@@ -1,10 +1,11 @@
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
+
 const solveButton = document.querySelector('.push-button span');
 const clearButton = document.querySelector('.clear-button');
 const mobileInput = document.querySelector('.mobile-input');
-let isInputMobile = false;
 
+let isInputMobile = false;
 const { width, height } = canvas.getBoundingClientRect();
 
 // resize canvas according to the DPI
@@ -18,9 +19,9 @@ context.scale(devicePixelRatio, devicePixelRatio);
 canvas.style.width = width + 'px';
 canvas.style.height = height + 'px';
 
-function create2DArray(width, height) {
+/* function create2DArray(width, height) {
     return Array.from(Array(height), () => new Array(width).fill(0) );
-}
+}*/
 
 let validMatrix = [
     [0, 0, 0, 2, 6, 0, 7, 0, 1],
@@ -35,6 +36,7 @@ let validMatrix = [
 ];
 
 // let board = new SudokuBoard(create2DArray(9, 9), 0, 0, width, height);
+
 let board = new SudokuBoard(validMatrix, 0, 0, width, height);
 let pointer = new SquarePointer(0, 0, width/9, height/9, width/9, height/9);
 
@@ -49,8 +51,6 @@ function clear() {
 
 function render() {
     clear();
-    // context.fillStyle = 'blue';
-    // context.fillRect(0, 0, width, height);
     pointer.render(context);
     board.render(context);
 }
@@ -155,15 +155,13 @@ canvas.addEventListener('click', function(event) {
     pointer.y = interpolatedY;
 });
 
-loop();
-// render();
-// document.body.addEventListener('load', loop); fix this so that loop only runs when body is loaded
-
 solveButton.addEventListener('click', function(){
-    if (board.isValid()) board.solve();
+	if (board.isValid()) board.solve();
 });
 
 clearButton.addEventListener('click', function() {
     clearButton.classList.add('disabled');
     board.clear();
 });
+
+loop();
