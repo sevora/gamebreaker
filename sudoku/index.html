@@ -3,18 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sudoku</title>
+        <title>Gamebreaker: Sudoku</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <header>Sudoku<header>
+        <header>Sudoku</header>
         <div class="canvas-wrapper">
             <canvas width="300" height="300"></canvas>
+            <button class="edit-button">Edit: Off</button>
             <button class="clear-button">Clear</button>
         </div>
-        <button class="push-button">
-            <span>Solve</span>
-        </button>
+        <div class="button-wrapper">
+            <button class="push-button">
+                <span>Solve</span>
+            </button>
+        </div>
+        <div class="game-message"></div>
         <input type="number" class="mobile-input"/>
         <script src="js/SudokuBoard.js"></script>
         <script src="js/SquarePointer.js"></script>

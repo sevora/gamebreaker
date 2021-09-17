@@ -1,43 +1,65 @@
+/*
+ * This is the Sudoku Board Class
+ * It is a renderable sudoku board with several options on rendering:
+ * - render the numbers only 
+ * - render the grid only
+ * - render the whole thing
+ *
+ * and a recursive solve method, that uses a backtracking solution.
+ */
 class SudokuBoard {
 
+    /*
+     * constructor accepts
+     * matrix: a 9x9 2D array of integers,
+     * x: A number representing x-coordinate when rendered,
+     * y: A number representing y-coordinate when rendered,
+     * width: A number representing its width when rendered,
+     * height: A number representing its height when rendered
+     */
     constructor(matrix, x, y, width, height) {
         this.matrix = matrix;
+        this.valid = this.isValid();
 
-        let hasValidWidth = this.matrix.length == 9;
-        let hasValidHeight = this.matrix.every(row => row.length == 9);
-        let hasValidCells = this.matrix.flat(1).every(element => typeof element == 'number' && element >= 0 && element <= 9);
-
-        let currentWidth = this.matrix.length;
-        let currentHeight = this.matrix[0] ? this.matrix[0].length : 0;
-        let mainError = 'Matrix must be 2-dimensions of size 9x9.'
-
-        if ( !hasValidWidth || !hasValidHeight ) {
-            throw `${mainError} Current: (${currentWidth}, ${currentHeight}). Expected: (9, 9)`;
-        }
-
-        if ( !hasValidCells ) {
-            throw `${mainError} All elements must be numbers ranging from 0 to 9.`;
-        }
-
-        this.valid = this.isValid(); // checks if the board has solutions
         this.x = x;
         this.y = y;
+
         this.width = width;
         this.height = height;
+
+        this.cellWidth = this.width/9;
+        this.cellHeight = this.height/9;
     }
-    
+
+    /*
+     * copies another SudokuBoard instance matrix unto itself, returns undefined
+     * board: a different SudokuBoard instance
+     */
+    copyMatrix(board) {
+        for(let y = 0; y < 9; ++y) {
+            for(let x = 0; x < 9; ++x) {
+                this.matrix[y][x] = board.matrix[y][x];
+            }
+        }
+    }
+
+
+    // used to fill the matrix back to 0s, returns undefined
     clear() {
-    	for(let y = 0; y < this.matrix.length; ++y) {
-    		for(let x = 0; x < this.matrix[y].length; ++x) {
+    	for(let y = 0; y < 9; ++y) {
+    		for(let x = 0; x < 9; ++x) {
     			this.matrix[y][x] = 0;
     		}
     	}
     }
     
+    // returns the rows of the sudoku board as arrays within arrays
     getRows() {
         return this.matrix;
     }
 
+    
+    // returns the columns of the sudoku board as arrays within arrays
     getColumns() {
         let columns = [];
         
@@ -48,6 +70,10 @@ class SudokuBoard {
         return columns;
     }
 
+    /*
+     * returns a flat array consisting of all the numbers in the given position's subgrid
+     * the subgrid is according to the rules of sudoku
+     */
     getSubgrid(x, y) {
         let anchorY = y - (y % 3);
         let anchorX = x - (x % 3);
@@ -62,6 +88,7 @@ class SudokuBoard {
         return subgrid;
     }
 
+    // returns an array of arrays which represent the subgrids
     getSubgrids() {
  
         let subgrids = [];
@@ -89,36 +116,11 @@ class SudokuBoard {
         return { x: -1, y: -1 };
     }
 
-    // returns true if the given answer is valid at the given position
-    // false otherwise
+    /* 
+     * returns true if the given answer is valid at the 
+     * given position false otherwise
+     */
     testAnswerAt(x, y, answer) {
-
-        /*
-        let answerDoesNotExist = function(cell, index) {
-            if (cell == this.answer && index != this.position) return false;
-            return true;
-        }
-
-        let rowValid = this.matrix[y].every(answerDoesNotExist, { position: x, answer }); 
-        let columnValid = this.matrix.map(row => row[x]).every(answerDoesNotExist, { position: y, answer });
-
-        // rewrite to use answerDoesNotExist function by making getSubgrids better
-        let subgridValid = true;
-        let anchorY = y - (y % 3);
-        let anchorX = x - (x % 3);
-
-        for (let subgridY = anchorY; subgridY < anchorY + 3; ++subgridY) {
-            for (let subgridX = anchorX; subgridX < anchorX + 3; ++subgridX) {
-                
-                if (subgridY == y && subgridX == x) continue;
-
-                if (this.matrix[subgridY][subgridX] == answer) {
-                    subgridValid = false;
-                }
-            }
-        }
-
-        return rowValid && columnValid && subgridValid; */
 
         let answerDoesExist = function(cell, index) {
             return cell == this.answer && index != this.position;
@@ -127,7 +129,6 @@ class SudokuBoard {
         let anchorY = y - (y % 3);
         let anchorX = x - (x % 3);
         let flatIndex = (y - anchorY) * 3 + (x - anchorX);
-        // console.log(flatIndex, this.getSubgrid(x, y)[flatIndex]);
 
         return !this.getRows()[y].some(answerDoesExist, { position: x, answer }) 
             && !this.getColumns()[x].some(answerDoesExist, { position: y, answer })
@@ -136,25 +137,11 @@ class SudokuBoard {
         
     }
     
-    // validity for a sudoku board filled with acceptable values
-    // returns true if the board is valid (has solutions) and false otherwise
+    /*
+     * returns true if the board is valid (no repeating number 
+     * per slot according to rows, columns, and subgrids) and false otherwise
+     */
     isValid() {
-
-        /* let noRepeatingDigit = function(array) {
-            let digits = [];
-            for (let index = 0; index < array.length; ++index) {
-                let element = array[index];
-                if (digits.indexOf(element) > -1) return false;
-                if (element != 0) digits.push(array[index]);
-            }
-            return true;
-        }
-
-        let rowsValid = this.getRows().every(noRepeatingDigit);
-        let columnsValid = this.getColumns().every(noRepeatingDigit);
-        let subgridsValid = this.getSubgrids().every(noRepeatingDigit);
-
-        return rowsValid && columnsValid && subgridsValid; */
 
         let hasRepeatingDigit = function(array) {
             let digits = [];
@@ -172,16 +159,22 @@ class SudokuBoard {
 
     }
 
+    // returns the numerical value at given position
     getValueAt(x, y) {
         return this.matrix[y][x];
     }
 
+    // sets the numerical value at given position
     setValueAt(x, y, value) {
         this.matrix[y][x] = value;
         this.valid = this.isValid();
         return value;
     }
 
+    /*
+     * recursive backtracking algorithm that mutates the matrix array
+     * returns true if there is a solution, otherwise false
+     */
     solve() {
 
         let emptyCell = this.getEmptyCell();
@@ -206,35 +199,15 @@ class SudokuBoard {
 
     }
 
-    render(context) {
-
-        let cellWidth = this.width/9;
-        let cellHeight = this.height/9;
-
+    // renders the grid via canvas API
+    renderGrid(context) {
         context.save();
-        context.translate(this.x, this.y);
-
-        context.fillStyle = this.valid ? 'black' : 'red';
-        context.strokeStyle = 'black';
-
-        context.font = `${this.width / 11}px Roboto`;
-        context.textBaseline = 'middle';
-        context.textAlign = 'center';
-
-        // draw the numbers in the matrix
-        for (let y = 0; y < 9; ++y) {
-            for (let x = 0; x < 9; ++x) {
-                let text = this.matrix[y][x];
-                if (text == 0) continue;
-                context.fillText(text, x * cellWidth + cellWidth / 2, y * cellHeight + cellHeight / 2);
-            }
-        }
 
         context.fillStyle = 'black';
 
         // draw the horizontal lines, starting from the top to the bottom
         for (let y = 0; y < 10; ++y) {
-            let currentHeight = y * cellHeight;
+            let currentHeight = y * this.cellHeight;
             context.lineWidth = y % 3 == 0 ? 2 : 1; 
 
             context.beginPath();
@@ -246,7 +219,7 @@ class SudokuBoard {
 
         // draw the vertical lines, starting from left to right
         for (let x = 0; x < 10; ++x) {
-            let currentWidth = x * cellWidth;
+            let currentWidth = x * this.cellWidth;
 
             // increases line width to emphasize vertical sub-grid lines
             context.lineWidth = x % 3 == 0 ? 2 : 1;
@@ -258,6 +231,33 @@ class SudokuBoard {
         }
 
         context.restore();
+
+    }
+
+    // renders the numbers in the matrix through canvas API
+    renderMatrix(context) {
+        context.save();
+        context.translate(this.x, this.y);
+
+        context.font = `${this.width / 11}px Roboto`;
+        context.textBaseline = 'middle';
+        context.textAlign = 'center';
+
+        for (let y = 0; y < 9; ++y) {
+            for (let x = 0; x < 9; ++x) {
+                let text = this.matrix[y][x];
+                // skip rendering all 0s
+                if (text == 0) continue;        
+                context.fillText(text, x * this.cellWidth + this.cellWidth / 2, y * this.cellHeight + this.cellHeight / 2);
+            }
+        }
+
+        context.restore();
+    }
+
+    render(context) {
+        this.renderGrid(context);
+        this.renderMatrix(context);
     }
 
 }

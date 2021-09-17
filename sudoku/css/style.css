@@ -18,7 +18,15 @@ canvas {
     margin: 10px auto 20px auto;
 }
 
-.clear-button {
+.button-wrapper {
+    text-align: center;
+}
+
+.edit-button {
+    float: left;
+}
+
+.clear-button, .edit-button {
 	color: #2F97EC;
     font-size: 18px;
     border: none;
@@ -63,6 +71,12 @@ canvas {
 
 .push-button:active span {
 	transform: translateY(-2px);
+}
+
+.game-message {
+    text-align: center;
+    margin: 20px auto;
+    font-size: 20px;   
 }
 
 .mobile-input {
