@@ -1,0 +1,145 @@
+head, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+}
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+    font-weight: 500;
+    font-family: Roboto;
+    text-transform: uppercase;
+}
+
+.main h1 {
+    margin-bottom: 0px;
+}
+
+.byline {
+    text-align: center;
+    font-family: Roboto;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.byline a {
+    color: black;
+    text-decoration: none;
+}
+
+.main {
+    width: 300px;
+    margin: auto;
+}
+
+.grid-container {
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.box {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+
+    margin: 1px;
+    padding: 1px;
+    border: 2px solid gray;
+
+    cursor: pointer;
+}
+
+.green {
+    color: white;
+    background-color: green;
+    border: 1px solid green !important;
+}
+
+.yellow {
+    color: white;
+    background-color: #d4c62f;
+    border: 1px solid #d4c62f !important;
+}
+
+.gray {
+    color: white;
+    background-color: gray;
+    border: 1px solid gray !important;
+}
+
+.filled {
+    border: 1px solid black;
+    border-width: 2px;
+}
+
+.suggestion {
+    width: 300px;
+    margin: auto;
+}
+
+.suggestion-button {
+    font-family: Roboto;
+    color: white;
+    background-color: black;
+
+    width: 300px;
+    height: 50px;
+
+    margin: auto;
+    margin-top: 20px;
+
+    border-radius: 35px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.suggestion-button .word {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    flex-grow: 2;
+    text-transform: uppercase;
+}
+
+.suggestion-button .next {
+    background-color: white;
+    color: black;
+    padding: 7px;
+
+    font-weight: 300; 
+    text-transform: uppercase;
+    border-radius: 15px;
+    font-size: 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.suggestion .count {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px;
+    text-align: center;
+}
+
+input.hidden {
+	width: 0;
+	overflow: hidden;
+	position: absolute;
+	top: -100000px;
+}
