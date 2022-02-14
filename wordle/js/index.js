@@ -117,8 +117,13 @@ function filterWordsByClues(words, previousWord, green, yellow, gray) {
 
 // used to paginate on the suggestions list
 function updateSuggestion(index) {
-    suggestionWord.innerText = words[index];
-    suggestionCount.innerText = `${index + 1} of ${words.length}`;
+    if (words.length > 0) {
+        suggestionWord.innerText = words[index];
+        suggestionCount.innerText = `${index + 1} of ${words.length}`;
+    } else {
+        suggestionWord.innerText = 'No more';
+        suggestionCount.innerText = 'No solution';
+    }
 }
 
 // updates the UI (words list, and even the boxes) according to the parameters given
