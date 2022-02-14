@@ -141,6 +141,13 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 20px;
     margin: 10px;
     cursor: pointer;
+    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .suggestion .count {
@@ -149,6 +156,30 @@ h1, h2, h3, h4, h5, h6 {
     margin: 5px;
     text-align: center;
 }
+
+.suggestion .submit {
+    font-size: 36px;
+    font-weight: 600;
+
+    width: 300px;
+    height: 50px;
+    text-transform: uppercase;
+
+    color: black;
+    border: 2px solid black;
+    background-color: white;
+    
+    border-radius: 35px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+.suggestion .submit:hover, .suggestion .submit:active {
+    color: white;
+    border: 2px solid white;
+    background-color: black;
+}
+
 
 input.hidden {
 	width: 0;

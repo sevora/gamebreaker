@@ -1,5 +1,6 @@
 const inputField = document.querySelector('input');
 const grid = document.querySelector('.grid-container');
+const submit = document.querySelector('.suggestion .submit');
 const suggestionWord = document.querySelector('.suggestion .word');
 const suggestionCount = document.querySelector('.suggestion .count');
 const suggestionNext = document.querySelector('.suggestion .next');
@@ -114,11 +115,13 @@ function filterWordsByClues(words, previousWord, green, yellow, gray) {
  * This is the UI logic and it utilizes the functions above
  */
 
+// used to paginate on the suggestions list
 function updateSuggestion(index) {
     suggestionWord.innerText = words[index];
     suggestionCount.innerText = `${index + 1} of ${words.length}`;
 }
 
+// updates the UI (words list, and even the boxes) according to the parameters given
 function updateAnswersState(rowParameters) {
     let { previousWord, green, yellow, gray } = getRowParameters(currentRow);
     let boxes = getBoxesAtRow(currentRow);
@@ -131,6 +134,22 @@ function updateAnswersState(rowParameters) {
     words = filterWordsByClues(words, previousWord, green, yellow, gray);
     suggestionIndex = 0;
     updateSuggestion(suggestionIndex);
+}
+
+// this submits the current row as an answer and moves on to the next row
+// returns a boolean indicating whether the submission is successful or not
+function submitCurrentRow() {
+    let rowParameters = getRowParameters(currentRow);
+    
+    if (rowParameters.previousWord.length == 5 && 
+        words.indexOf(rowParameters.previousWord) > -1) {
+        updateAnswersState(rowParameters);
+        currentColumn = 0;
+        currentRow = Math.min(maxRow - 1, currentRow + 1);
+        return true;
+    }
+    
+    return false;
 }
 
 // handles input of letters
@@ -175,14 +194,8 @@ inputField.addEventListener('keydown', function(event) {
     }
 
     // when enter is clicked code
-    let rowParameters = getRowParameters(currentRow);
-    console.log(rowParameters);
-    if (event.keyCode == 13 && 
-        rowParameters.previousWord.length == 5 && 
-        words.indexOf(rowParameters.previousWord) > -1) {
-        updateAnswersState(rowParameters);
-        currentColumn = 0;
-        currentRow = Math.min(maxRow - 1, currentRow + 1);
+    if (event.keyCode == 13) {
+        submitCurrentRow();
     }
 });
 
@@ -192,6 +205,10 @@ suggestionNext.addEventListener('click', function() {
     }
     
     updateSuggestion(suggestionIndex);
+});
+
+submit.addEventListener('click', function() {
+    submitCurrentRow();
 });
 
 // this loop properly assigns each box's designated column, row, and event listener for 
