@@ -5,6 +5,7 @@ head, body {
     padding: 0;
     position: fixed;
 }
+
 body {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
@@ -60,6 +61,18 @@ h1, h2, h3, h4, h5, h6 {
     border: 2px solid gray;
 
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.box:focus {
+    outline: none !important;
 }
 
 .green {

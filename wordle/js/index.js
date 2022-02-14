@@ -222,7 +222,7 @@ Array.from(grid.children).forEach(function(box, index) {
 });
 
 // this is to allow user inputs
-document.body.addEventListener('click', function(event) {
+grid.addEventListener('click', function(event) {
     inputField.focus();
 });
 
