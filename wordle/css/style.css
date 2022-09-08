@@ -13,7 +13,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     text-align: center;
     font-weight: 500;
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     text-transform: uppercase;
 }
 
@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .byline {
     text-align: center;
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     margin-bottom: 10px;
     cursor: pointer;
 }
