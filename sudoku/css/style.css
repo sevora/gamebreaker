@@ -6,11 +6,23 @@ header {
     font-size: 32px;
     font-family: 'Fin Serif Display';
     text-align: center;
+    margin-top: 20px;
 }
 
 canvas {
     display: block;
     margin: 0 auto;
+}
+
+.byline {
+    text-align: center;
+    font-family: 'Fin Serif Display';
+    margin-bottom: 20px;
+}
+
+.byline a {
+    text-decoration: none;
+    color: black;
 }
 
 .canvas-wrapper {
