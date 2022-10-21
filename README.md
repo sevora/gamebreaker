@@ -1,6 +1,16 @@
 # Gamebreaker &middot; ![GitHub](https://img.shields.io/github/license/sevora/gamebreaker) ![GitHub repo size](https://img.shields.io/github/repo-size/sevora/gamebreaker)
 The objective of this project is to create interactive pages that can solve traditional games by having the user input the state of the game. 
 
+## List of games
+1. [Sudoku](https://sevora.github.io/sudoku/)
+    1. [Python Source Code](https://github.com/sudoku/demo.py)
+    2. [Javascript Source Code](https://github.com/sudoku/js/)
+2. [Wordle](https://sevora.github.io/wordle/)
+    1. [Python Source Code](https://github.com/wordle/demo.py)
+    2. [Javascript Source Code](https://github.com/wordle/js/)
+3. [Tic Tac Toe](#unavailable)
+    1. [Python Source Code](https://github.com/tic-tac-toe/demo.py)
+
 Each gamebreaker will be first made with a prototype on either [Node.js](https://nodejs.org) or [Python 3](https://www.python.org/) and later be made as an interactive page hosted on [Github Pages](https://pages.github.com/).
 
 ## Games to break
