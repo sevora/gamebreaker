@@ -177,13 +177,12 @@ class SudokuBoard {
      */
     solve() {
 
-        let emptyCell = this.getEmptyCell();
+        let { x, y } = this.getEmptyCell();
 
-        if (emptyCell.x == -1 && emptyCell.y == -1) {
+        if (x == -1 && y == -1) {
             return true;
         }
 
-        let { x, y } = emptyCell;
         for (let answer = 1; answer <= 9; ++answer) {
             if (this.testAnswerAt(x, y, answer)) {
                 
