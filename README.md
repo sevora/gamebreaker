@@ -3,13 +3,13 @@ The objective of this project is to create interactive pages that can solve trad
 
 ## List of games
 1. [Sudoku](https://sevora.github.io/sudoku/)
-    1. [Python Source Code](https://github.com/sevora/gamebreaker/sudoku/demo.py)
-    2. [Javascript Source Code](https://github.com/sevora/gamebreaker/sudoku/js/)
+    1. [Python Source Code](https://github.com/sevora/gamebreaker/blob/main/sudoku/demo.py)
+    2. [Javascript Source Code](https://github.com/sevora/gamebreaker/tree/main/sudoku/js)
 2. [Wordle](https://sevora.github.io/wordle/)
-    1. [Python Source Code](https://github.com/sevora/gamebreaker/wordle/demo.py)
-    2. [Javascript Source Code](https://github.com/sevora/gamebreaker/wordle/js/)
+    1. [Python Source Code](https://github.com/sevora/gamebreaker/blob/main/wordle/demo.py)
+    2. [Javascript Source Code](https://github.com/sevora/gamebreaker/tree/main/wordle/js)
 3. [Tic Tac Toe](#unavailable)
-    1. [Python Source Code](https://github.com/sevora/gamebreaker/tic-tac-toe/demo.py)
+    1. [Python Source Code](https://github.com/sevora/gamebreaker/blob/main/tic-tac-toe/demo.py)
 
 Each gamebreaker will be first made with a prototype on either [Node.js](https://nodejs.org) or [Python 3](https://www.python.org/) and later be made as an interactive page hosted on [Github Pages](https://pages.github.com/).
 
