@@ -2,10 +2,10 @@
 The objective of this project is to create interactive pages that can solve traditional games by having the user input the state of the game. 
 
 ## List of games
-1. [Sudoku](https://sevora.github.io/sudoku/)
+1. [Sudoku](https://sevora.github.io/gamebreaker/sudoku/)
     1. [Python Source Code](https://github.com/sevora/gamebreaker/blob/main/sudoku/demo.py)
     2. [Javascript Source Code](https://github.com/sevora/gamebreaker/tree/main/sudoku/js)
-2. [Wordle](https://sevora.github.io/wordle/)
+2. [Wordle](https://sevora.github.io/gamebreaker/wordle/)
     1. [Python Source Code](https://github.com/sevora/gamebreaker/blob/main/wordle/demo.py)
     2. [Javascript Source Code](https://github.com/sevora/gamebreaker/tree/main/wordle/js)
 3. [Tic Tac Toe](#unavailable)
