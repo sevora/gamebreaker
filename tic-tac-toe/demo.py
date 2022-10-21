@@ -43,7 +43,7 @@ def main():
                 print("You cannot use a filled position!")
                 continue
         else:
-            opponent_move = find_best_move(board, opponent)
+            opponent_move = find_best_move(board, opponent, player)
             if opponent_move != (-1, -1):
                 y, x = opponent_move
                 print(f"Opponent moved at {x}, {y}")
@@ -171,19 +171,18 @@ def minimax(board, depth, is_maximizing, maximizing_player, minimizing_player):
 
     return best_value
             
-def find_best_move(board, maximize_for):
+def find_best_move(board, maximizing_player, minimizing_player):
     X, empty, O = get_board_definitions()
 
-    minimize_for = X if maximize_for == O else O
     best_value = -1000
     best_move = (-1, -1)
 
     for y in range(3):
         for x in range(3):
             if board[y][x] == empty:
-                board[y][x] = maximize_for
+                board[y][x] = maximizing_player
 
-                move_value = minimax(board, 0, False, maximize_for, minimize_for)
+                move_value = minimax(board, 0, False, maximizing_player, minimizing_player)
                 
                 if move_value > best_value:
                     best_move = (y, x) 
