@@ -174,7 +174,7 @@ def minimax(board, depth, is_maximizing, maximizing_player, minimizing_player):
 def find_best_move(board, maximize_for):
     X, empty, O = get_board_definitions()
 
-    minimize_for = X if maximize_for == O else X
+    minimize_for = X if maximize_for == O else O
     best_value = -1000
     best_move = (-1, -1)
 
