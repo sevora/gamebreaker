@@ -1,9 +1,51 @@
+"""
+Wordle Solver Algorithm
+Goal: Given a set of clues, find the five-letter word.
+
+This is a relatively simple problem. Essentially we have a word,
+but we can only figure it out by answering other 5-letter words
+until we figure what the actual word is through the letters that we have.
+You can look at the guess function to see how this works. Initially, it has 
+all the 5-letter words. As more clues are given, words are eliminated,
+until hopefully we find the right word.
+"""
+
 import random
 words = []
 
-# load the word list
-with open('five_letter_words.txt', 'r') as words_file:
-    words = [line.rstrip() for line in words_file]
+def main():
+    global words
+
+    # load the word list
+    with open('five_letter_words.txt', 'r') as words_file:
+        words = [line.rstrip() for line in words_file]
+
+    print(len(words))
+    print('Wordle-Solver')
+    print('Input the corresponding numbers signifying letters according to the rule. Make sure, your answers are comma-separated.') 
+
+    word = get_initial_word()
+    attempts = 1
+    max_attempts = 6
+    found_answer = False
+ 
+    while attempts <= max_attempts:
+        print(prettify(word))
+        next_word = ask(word)
+
+        if (word == next_word):
+            found_answer = True
+            break
+
+        word = next_word
+        attempts += 1
+
+    if found_answer:
+        print('Found Answer:\n' + prettify(word))
+    else:
+        print(f'Failed to find answer within {max_attempts}')
+
+    print('Program End.')
 
 # helper to automatically parse inputs
 def custom_input(question):
@@ -82,35 +124,6 @@ def get_initial_word():
 
     return initial_word
 
-# This is the loop that runs for the solver
-def loop():
-    print('Wordle-Solver')
-    print('Input the corresponding numbers signifying letters according to the rule. Make sure, your answers are comma-separated.') 
-    
-    attempts = 1
-    max_attempts = 6
-    found_answer = False
-
-    word = get_initial_word()
-
-    while attempts <= max_attempts:
-        print(prettify(word))
-        next_word = ask(word)
-
-        if (word == next_word):
-            found_answer = True
-            break
-
-        word = next_word
-        attempts += 1
-
-    if found_answer:
-        print('Found Answer:\n' + prettify(word))
-    else:
-        print(f'Failed to find answer within {max_attempts}')
-
-    print('Program End.')
-
 # runs only when run as a script
 if __name__ == '__main__':
-    loop()
+    main()
