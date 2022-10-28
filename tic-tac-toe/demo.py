@@ -276,6 +276,9 @@ def minimax(board, depth, alpha, beta, is_maximizing, maximizing_player, minimiz
                 
                 if beta <= alpha:
                     break
+        else: # only executed if the inner loop did NOT break
+            continue
+        break
 
     return best_value
             

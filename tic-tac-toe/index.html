@@ -4,19 +4,25 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>Gamebreaker: Tic Tac Toe</title>
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <header>Tic-Tac-Toe</header>
-        <canvas></canvas>
-        
-        <div id="control">
-            <button>Start Game</button>
-            <label for="playerFirst">Go first?</label>
-            <input type="checkbox" id="playerFirst" />
+        <header>Tic-Tac-Toe AI</header>
+        <div class="byline">
+            by <a href="https://twitter.com/ralphlouisgopez" target="_blank">@ralphlouisgopez</a>
+        </div>
+        <div class="canvas-wrapper">
+            <canvas width="300" height="300"></canvas>
+        </div> 
+        <div class="game-message">
+
+        </div>
+        <div class="controls">
+            <button class="start-button">Play game</button>
+            <label class="start-button-label" for="playerFirst">Go first?</label>
+            <input type="checkbox" id="playerFirst" checked />
         </div>
 
-        <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-        <script>eruda.init();</script>
         <script src="js/index.js"></script>
     </body>
 </html>
