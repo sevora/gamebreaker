@@ -228,7 +228,7 @@ def is_board_filled(board):
                 return False
     return True
 
-def minimax(board, depth, is_maximizing, maximizing_player, minimizing_player):
+def minimax(board, depth, alpha, beta, is_maximizing, maximizing_player, minimizing_player):
     """
     minimax this is the main algorithm that uses the minimax theory. It returns the score of
     the board state according to minimax theory. Essentially we could have multiple board states,
@@ -247,7 +247,7 @@ def minimax(board, depth, is_maximizing, maximizing_player, minimizing_player):
 
     # if score has an absolute value of 10,
     # this means there is a winner
-    if abs(score) == 10:
+    if abs(score) == 10 or depth == 0:
         return score
     # additonally, if the board is filled at this point
     # and previous condition is met, then it is a tie
@@ -263,11 +263,19 @@ def minimax(board, depth, is_maximizing, maximizing_player, minimizing_player):
                 board[y][x] = maximizing_player if is_maximizing else minimizing_player
                 
                 # imagine this as the width of the tree graph
-                minimax_result = minimax(board, depth+1, not is_maximizing, maximizing_player, minimizing_player) 
+                minimax_result = minimax(board, depth-1, alpha, beta, not is_maximizing, maximizing_player, minimizing_player) 
                 best_value = (max if is_maximizing else min)(best_value, minimax_result)
 
                 # as we are only testing the move, we set the cell we tested on back to empty
                 board[y][x] = empty
+
+                if is_maximizing:
+                    alpha = max(alpha, minimax_result)
+                else:
+                    beta = min(beta, minimax_result)
+                
+                if beta <= alpha:
+                    break
 
     return best_value
             
@@ -297,7 +305,7 @@ def find_best_move(board, maximizing_player, minimizing_player):
                 # the parameter is_maximizing is False as this test move in this loop is our turn
                 # and the next move would then be our opponent's hence they're gonna be minimizing
                 # as they will pick the move with the least gains for us (equivalently most gains to them) 
-                move_value = minimax(board, 0, False, maximizing_player, minimizing_player)
+                move_value = minimax(board, 9, -1000, 1000, False, maximizing_player, minimizing_player)
                 
                 if move_value > best_value:
                     best_move = (y, x) 
