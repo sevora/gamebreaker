@@ -63,8 +63,7 @@ function update() {
     board[y][x] = opponent;
     isPlayerTurn = true;
   }
-
-  
+ 
   // technically we have to check for a winner after every turn of the players
   // one check for player, and another for the opponent, but 
   // in here, we don't do that since we know the player can only lose or get a tie
