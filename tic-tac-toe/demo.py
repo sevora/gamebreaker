@@ -66,6 +66,11 @@ def main():
 
     while True:
         print( prettify(board) )
+
+        # checks for winner should be after each player moves
+        # meaning one check after player, and one check after opponent
+        # however, the minimax algorithm in tic-tac-toe pretty much ensures
+        # that it will win or tie against any opponent
         winner = check_for_winner(board)
 
         if winner:
@@ -236,7 +241,9 @@ def minimax(board, depth, alpha, beta, is_maximizing, maximizing_player, minimiz
     with the highest value, check find_best_move for that.
 
     :param board: a 2d array that has the board values.
-    :param depth: an integer corresponding to how deep we are in the recursion.
+    :param depth: an integer corresponding to how deep the recursion should be.
+    :param alpha: alpha for alpha-beta pruning.
+    :param beta: beta for alpha-beta pruning.
     :param is_maximizing: a boolean that determines whether we maximize the score or minimize it.
     :param maximizing_player: an integer that determines the maximizing_player / or symbol aka X or O.
     :param minimizing_player: an integer that determines the minimizing_player / or symbol aka X or O.
@@ -262,7 +269,7 @@ def minimax(board, depth, alpha, beta, is_maximizing, maximizing_player, minimiz
             if board[y][x] == empty:
                 board[y][x] = maximizing_player if is_maximizing else minimizing_player
                 
-                # imagine this as the width of the tree graph
+                # imagine this as the depth of the tree graph
                 minimax_result = minimax(board, depth-1, alpha, beta, not is_maximizing, maximizing_player, minimizing_player) 
                 best_value = (max if is_maximizing else min)(best_value, minimax_result)
 
