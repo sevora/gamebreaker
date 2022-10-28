@@ -91,7 +91,7 @@ function update() {
 /**
  * This is the render part of the game loop where
  * the graphics are drawn in the canvas.
- * @return {void}
+ * @returns {void}
  */
 function render() {
   context.clearRect(0, 0, 300, 300);
@@ -117,7 +117,7 @@ function render() {
  * This is a callback for when the start button
  * is clicked.
  * @param {ClickEvent} event - A click event.
- * @return {void}
+ * @returns {void}
  */
 function handleStartClick(event) {
   resetBoard(board);
@@ -145,7 +145,7 @@ function handleStartClick(event) {
 /**
  * The event listener for the canvas.
  * @param {ClickEvent} event - A click event.
- * @return {void}
+ * @returns {void}
  */
 function handleCanvasClick(event) {
   if (!isGameStarted || !isPlayerTurn) return null;
@@ -171,7 +171,7 @@ function handleCanvasClick(event) {
 /**
  * A helper function that iterates over a 3x3 grid.
  * @param {callback} callback - A function that is called per cell in the grid.
- * @return {void}
+ * @returns {void}
  */
 function forGrid(callback) {
   for (let gridY = 0; gridY < 3; ++gridY) {
@@ -186,7 +186,7 @@ function forGrid(callback) {
 /**
  * Sets all elements in the board to be empty.
  * @param {int[][]} board - a 3x3 array with the values of tic-tac-toe enums.
- * @return {int[][]} the reference to the empty board.
+ * @returns {int[][]} the reference to the empty board.
  */
 function resetBoard(board) {
   forGrid( function(gridY, gridX) {
@@ -201,7 +201,7 @@ function resetBoard(board) {
  * defined from get_board_definitions) sequence forming a win in a traditional tic-tac-toe 
  * board.
  * @param {int[][]} board - a 3x3 array with the values of tic-tac-toe enums.
- * @return {int|null} a value of one of the enums or null.
+ * @returns {int|null} a value of one of the enums or null.
  */
 function checkForWinner(board) {
   // checks a win by row, as in horizontally
@@ -235,7 +235,7 @@ function checkForWinner(board) {
  * Returns a score directly by looking only at the current state of the board.
  * @param {int[][]} board - a 3x3 array with the values of tic-tac-toe enums.
  * @param {int} maximizeFor - a value of one of the enums (X or O).
- * @return {int} a value signifying the score in the perspective of maximizeFor enum.
+ * @returns {int} a value signifying the score in the perspective of maximizeFor enum.
  */
 function evaluateBoard(board, maximizeFor) {
   let winner = checkForWinner(board);
@@ -246,7 +246,7 @@ function evaluateBoard(board, maximizeFor) {
 /**
  * Determines whether the board still has empty cells.
  * @param {int[][]} board - a 3x3 array with the values of tic-tac-toe enums. 
- * @return {boolean} signifies whether board is filled or not.
+ * @returns {boolean} signifies whether board is filled or not.
  */
 function isBoardFilled(board) {
   for (let y = 0; y < 3; ++y) {
@@ -268,7 +268,7 @@ function isBoardFilled(board) {
  * @param {boolean} isMaximizing - refers to whether current is being maximized or not.
  * @param {int} maximizingPlayer - an enum referring to the maximizing player either X or O.
  * @param {int} minimizingPlayer - an enum referring to the minimizing player either X or O.
- * @return {int} the score for the given state of the board.
+ * @returns {int} the score for the given state of the board.
  */
 function minimax(board, depth, alpha, beta, isMaximizing, maximizingPlayer, minimizingPlayer) {
   let score = evaluateBoard(board, maximizingPlayer);
@@ -315,7 +315,7 @@ function minimax(board, depth, alpha, beta, isMaximizing, maximizingPlayer, mini
  * @param {int[][]} board - a 3x3 array with the values of tic-tac-toe enums.  
  * @param {int} maximizingPlayer - an enum referring to the maximizing player either X or O.
  * @param {int} minimizingPlayer - an enum referring to the minimizing player either X or O.
- * @return {int[]} an array with 2 elements, y and x referring to grid coordinates for the best move.
+ * @returns {int[]} an array with 2 elements, y and x referring to grid coordinates for the best move.
  */
 function findBestMove(board, maximizingPlayer, minimizingPlayer) {
   let bestValue = -1000;
