@@ -49,11 +49,14 @@ function update() {
     isPlayerTurn = true;
   }
 
-  let winner = checkForWinner(board);
-
   // once there is a winner, or the board is filled
   // the condition is false by default and code
   // below will run
+  
+  // technically we have to check for a winner after every turn of the players
+  // a.k.a. one check for player, and another for the opponent, but 
+  // in here, we don't do that since we know the player can only lose or get a tie
+  let winner = checkForWinner(board);
   if (!winner && !isBoardFilled(board)) return;
   let message;
 
