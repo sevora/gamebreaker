@@ -27,7 +27,7 @@ More Details:
 
 # If there is a solution, the matrix will be solved, otherwise it will stay as it is.
 # The solve method returns a boolean indicating whether the board was solved or not.
-# can be found at https://dingo.sbs.arizona.edu/~sandiway/sudoku/examples.html
+# This board and its solution can be found at https://dingo.sbs.arizona.edu/~sandiway/sudoku/examples.html
 inputs = [
     [0, 0, 0, 2, 6, 0, 7, 0, 1],
     [6, 8, 0, 0, 7, 0, 0, 9, 0],
@@ -175,8 +175,5 @@ class Board:
 if __name__ == '__main__':
     board = Board(inputs)
     print(f'Given Board:\n{board}')
-
-    if board.solve():
-        print(f'Solved board:\n{board}')
-    else:
-        print(f'Board has no solutions:\n{board}')
+    message = "Solved Board" if board.solve() else "Board Has No Solution"
+    print(f'{message}:\n{board}')
