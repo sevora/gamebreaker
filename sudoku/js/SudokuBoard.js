@@ -260,3 +260,5 @@ class SudokuBoard {
     }
 
 }
+
+export default SudokuBoard;

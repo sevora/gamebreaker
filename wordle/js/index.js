@@ -1,3 +1,5 @@
+import { getAllWords } from './five-letter-words.js';
+
 const inputField = document.querySelector('input');
 const grid = document.querySelector('.grid-container');
 const submit = document.querySelector('.suggestion .submit');
@@ -17,11 +19,6 @@ let words = getAllWords();
  * These are all the functions to solve a wordle puzzle and
  * some logic to make UI logic easier to write
  */
-
-// returns all valid wordle-words
-function getAllWords() {
-    return [...FIVE_LETTER_WORDS];
-}
 
 // UI-based returns the current box in grid
 function getCurrentBox() {

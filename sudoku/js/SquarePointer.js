@@ -35,3 +35,5 @@ class SquarePointer {
         context.restore();
     }
 }
+
+export default SquarePointer;
