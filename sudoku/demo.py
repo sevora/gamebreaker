@@ -25,9 +25,9 @@ More Details:
     valid digits, go back to the previous cell (meaning the previous iteration and steps that have been halted will continue).
 """
 
-# Currently this demo only supports input that have a real solution.
-# Otherwise, there will be an infinite loop. The inputs and answers
-# can be found at https://dingo.sbs.arizona.edu/~sandiway/sudoku/examples.html
+# If there is a solution, the matrix will be solved, otherwise it will stay as it is.
+# The solve method returns a boolean indicating whether the board was solved or not.
+# This board and its solution can be found at https://dingo.sbs.arizona.edu/~sandiway/sudoku/examples.html
 inputs = [
     [0, 0, 0, 2, 6, 0, 7, 0, 1],
     [6, 8, 0, 0, 7, 0, 0, 9, 0],
@@ -141,8 +141,9 @@ class Board:
 
     def solve(self):
         """
-        Use this to solve the sudoku board, only works properly if there is a valid
-        solution. Otherwise, an infinite loop occurs.
+        Use this to solve the sudoku board.
+        Mutates self.matrix, returns a boolean value indicating
+        whether board was solved or not.
         """
 
         # this function is explained at the top part of this program
@@ -174,5 +175,5 @@ class Board:
 if __name__ == '__main__':
     board = Board(inputs)
     print(f'Given Board:\n{board}')
-    board.solve()
-    print(f'Solved board:\n{board}')
+    message = "Solved Board" if board.solve() else "Board Has No Solution"
+    print(f'{message}:\n{board}')
