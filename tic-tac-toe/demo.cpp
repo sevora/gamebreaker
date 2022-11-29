@@ -12,6 +12,16 @@
 enum moves { _, X, O };
 
 /**
+ * Empties the board.
+ * @param board This is the 3x3 board but is represented as a 1D array.
+ */
+void clear_board(enum moves board[9]) {
+    for (int i = 0; i < 9; ++i) {
+        board[i] = _;
+    }
+}
+
+/**
  * Use to get the winner of a game of tic-tac toe.
  * @param board This is the 3x3 board but is represented as a 1D array.
  * @return The value of the winner (value of X or O as such) in enum moves.
@@ -159,6 +169,8 @@ void print_pretty(enum moves board[9]) {
 
 int main() {
     moves board[9]; // by default, board is filled with 0s
+    clear_board(board);
+
     moves player = O, opponent = X;
     bool player_turn = false;
 
