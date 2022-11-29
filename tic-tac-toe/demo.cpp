@@ -149,7 +149,7 @@ int find_best_move(enum moves board[9], enum moves maximizing_player, enum moves
  */
 void print_pretty(enum moves board[9]) {
     for (int y = 0; y < 3; ++y) {
-        if (y == 0) std::cout << "  --- --- ---" << std::endl;
+        if (y == 0) std::cout << "  --- --- ---\n";
         for (int x = 0; x < 3; ++x) {
             if (x == 0) std::cout << " | ";
             moves move = board[y * 3 + x];
@@ -163,7 +163,7 @@ void print_pretty(enum moves board[9]) {
 
             std::cout << symbol << " | ";
         }
-        std::cout << std::endl << "  --- --- ---" << std::endl;
+        std::cout << "\n  --- --- ---\n";
     }
 }
 
@@ -209,13 +209,13 @@ int main() {
             if (-1 < player_move_index && player_move_index < 9 && board[player_move_index] == _) {
                 board[player_move_index] = player;
             } else {
-                std::cout << "You cannot use a filled position!" << std::endl;
+                std::cout << "You cannot use a filled position!\n";
                 continue;
             }
         } else {
             int opponent_move_index = find_best_move(board, opponent, player);
             if (opponent_move_index != -1) {
-                std::cout << "Opponent moved at index " << opponent_move_index << std::endl;
+                std::cout << "Opponent moved at index " << opponent_move_index << '\n';
                 board[opponent_move_index] = opponent;
             }
         }
