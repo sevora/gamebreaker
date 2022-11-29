@@ -252,14 +252,8 @@ def minimax(board, depth, alpha, beta, is_maximizing, maximizing_player, minimiz
     score = evaluate_board(board, maximizing_player)
     _X, empty, _O = get_board_definitions()
 
-    # if score has an absolute value of 10,
-    # this means there is a winner
-    if abs(score) == 10 or depth == 0:
-        return score
-    # additonally, if the board is filled at this point
-    # and previous condition is met, then it is a tie
-    elif is_board_filled(board):
-        return 0
+    if abs(score) > 0 or is_board_filled(board) or depth == 0:
+        return score 
 
     best_value = (-1 if is_maximizing else 1) * 1000 
 
