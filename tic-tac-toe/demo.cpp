@@ -168,8 +168,8 @@ void print_pretty(enum moves board[9]) {
 }
 
 int main() {
-    moves board[9]; // by default, board is filled with 0s
-    clear_board(board);
+    moves board[9];     // by default, board is filled with 0s
+    clear_board(board); // that's what I thought until it was different on Android, hence this
 
     moves player = O, opponent = X;
     bool player_turn = false;
