@@ -4,6 +4,9 @@
  * P.S. Ralph
  */
 
+import SudokuBoard from './SudokuBoard.js';
+import SquarePointer from './SquarePointer.js';
+
 // very important in rendering the gamebreaker
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
