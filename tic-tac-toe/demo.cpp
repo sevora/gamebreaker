@@ -8,6 +8,7 @@
  */
 #include <iostream>
 #include <algorithm>
+#include <limits>
 
 enum moves { _, X, O };
 
@@ -190,13 +191,13 @@ int main() {
 
         if (winner != _) {
             if (winner == player) {
-                std::cout << "Congrats! You won!" << std::endl;
+                std::cout << "Congrats! You won!\n";
             } else {
-                std::cout << "Oops! You lost!" << std::endl;
+                std::cout << "Oops! You lost!\n";
             }
             break;
         } else if ( is_board_filled(board) ) {
-            std::cout << "The game ends in a tie!" << std::endl;
+            std::cout << "The game ends in a tie!\n";
             break;
         }
 
@@ -206,12 +207,20 @@ int main() {
             std::cin >> player_move_index;
             player_move_index -= 1;
 
+            if ( std::cin.fail() ) {
+                std::cout << "You did not enter a valid move!\n";
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                continue;
+            }
+
             if (-1 < player_move_index && player_move_index < 9 && board[player_move_index] == _) {
                 board[player_move_index] = player;
             } else {
-                std::cout << "You cannot use a filled position!\n";
+                std::cout << "You cannot use a filled or non-existent position!\n";
                 continue;
             }
+
         } else {
             int opponent_move_index = find_best_move(board, opponent, player);
             if (opponent_move_index != -1) {
