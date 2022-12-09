@@ -59,16 +59,17 @@ int find_empty_cell(int* board) {
 bool solve(int* board) {
     int position = find_empty_cell(board);
 
-    if (position == -1) {
+    if (position == -1)
         return true;
-    }
-
+    
     for (int answer = 1; answer <= 9; ++answer) {
-        if ( test_answer_at(board, position, answer) ) continue;
-            int& cell = *(board + position);
-            cell = answer;
-            if ( solve(board) ) return true;
-            cell = 0;
+        if ( !test_answer_at(board, position, answer) ) 
+            continue;
+        int& cell = *(board + position);
+        cell = answer;
+        if ( solve(board) ) 
+            return true;
+        cell = 0;
     }
     
     return false;
