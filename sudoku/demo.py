@@ -150,7 +150,10 @@ class Board:
         # Step 1: Find an empty cell, if there are no empty cells skip to step 5.
         current_position = self.find_empty_cell()
 
-        # 5. Terminate the whole sequence.
+        # 5. Terminate the whole sequence. 
+        # To clarify, this terminates the whole sequence for when the board is completed.
+        # This is because a position of (-1, -1) means there's no more empty position, hence the board is filled.
+        # On the loop we have, remember that we only use working answers, hence filled = solved.
         if current_position == (-1, -1):
             return True
 
@@ -161,15 +164,16 @@ class Board:
             if self.test_answer_at(x, y, answer):
                 self.matrix[y][x] = answer
 
-                # Step 3: If any working digit is found, go back to step 1 (put the current step 2 on hold).
+                # Step 3: If any working digit is found, go proceed to step 1 again but
+                # on a new "stack" (put the current step 2 on hold as it is still valid).
                 if self.solve():
                     return True
  
                 self.matrix[y][x] = 0
 
         # 4. If no working digit is found meaning all (1-9) digits have been tried, set the current cell 
-        # back to empty (hence self.matrix[y][x] = 0), and go back to the previous cell that has been filled. 
-        # This means that we go back to step 2 of that cell. Do NOT proceed to step 5 from this step.
+        # back to empty (hence self.matrix[y][x] = 0), and go back to the previous cell that has been filled which
+        # will also now be empty and try the next working digit on it (step 2), in short we go back to step 2 of that previous cell. Do NOT proceed to step 5 from this step.
         return False
 
 if __name__ == '__main__':
