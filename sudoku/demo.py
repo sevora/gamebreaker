@@ -141,9 +141,10 @@ class Board:
 
     def solve(self):
         """
-        Use this to solve the sudoku board.
-        Mutates self.matrix, returns a boolean value indicating
-        whether board was solved or not.
+        Use this to solve the sudoku board. 
+        Mutates self.matrix (solves the board in-place), 
+        returns a boolean value indicating whether board 
+        was solved or not.
         """
 
         # this function is explained at the top part of this program
@@ -173,7 +174,8 @@ class Board:
 
         # 4. If no working digit is found meaning all (1-9) digits have been tried, set the current cell 
         # back to empty (hence self.matrix[y][x] = 0), and go back to the previous cell that has been filled which
-        # will also now be empty and try the next working digit on it (step 2), in short we go back to step 2 of that previous cell. Do NOT proceed to step 5 from this step.
+        # will also now be empty and try the next working digit on it (step 2), in short we go back to step 2 of that 
+        # previous cell. Do NOT proceed to step 5 from this step.
         return False
 
 if __name__ == '__main__':
