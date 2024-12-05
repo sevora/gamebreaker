@@ -25,4 +25,4 @@ Wordle is a word puzzle where a five-letter word must be guessed within six atte
 Tic-Tac-Toe is a 1v1 board-game in a 3x3 board where the condition to win is to have the player have their symbol be placed in the grid thrice such that it forms a straight line. This gamebreaker pits the player against "artificial intelligence" or to be more specific, the minimax algorithm where it can look moves ahead to steer the game towards its victory. [The tic-tac-toe AI is available here.](https://sevora.github.io/gamebreaker/tic-tac-toe/)
 
 ### Adding more later
-Other games will be added later. I only work with one game and game-breaker at a time.
+Other games will be added later. I only work with one game and game-breaker at a time. Will accept contributions in case anyone else wants to add games to solve here.
